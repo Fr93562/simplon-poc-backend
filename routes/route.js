@@ -2,17 +2,6 @@
 
 module.exports = function (app) {
 
-  /**
-   * Appel la méthode messageController qui est associée à la path demandée
-   */
-  var messageController = require('../controller/messageController');
-
-  app.route('/message')
-    .post(messageController.create)
-    .get(messageController.read)
-    .put(messageController.update)
-    .delete(messageController.delete);
-
   // User controller
 
   var userController = require('../controller/userController');
@@ -22,15 +11,13 @@ module.exports = function (app) {
 
   // Message controller
 
-  var messageController2 = require('../controller/messageController2');
-  var messagePath = new messageController2.messageController2();
+  var messageController = require('../controller/messageController');
+  var messagePath = new messageController.messageController();
 
-  app.route('/message2').post(messagePath.create); 
-   /*
-  .get(messagePath.read)
-    .put(messagePath.update)
-    .delete(messagePath.delete);
-  */
+  app.route('/message').post(messagePath.create)
+      .get(messagePath.read)
+      .put(messagePath.update)
+      .delete(messagePath.delete); 
 
   /**
    * Path par défaut, affiche des informations sur la requête précédente 

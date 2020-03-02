@@ -1,121 +1,135 @@
-var messageEntity = require('../model/message');
+var jsonCheckService = require('../service/jsonCheck');
+var contentService = require('../service/contentCheck');
+var hydrateService = require('../service/hydrate');
+var messageService = require('../service/message');
 var messageRequest = require('../model/messageRequest');
 
-
 /**
- * vérifie si la requête Json correponds à l'objet message
- * @param {*} req : Utilise l'objet requête en paramètre 
+ * gères les paths de message
+ * 
+ * @author : Francois Macko
  */
-function verify (req) {
+class messageController {
 
-    let status = false;
+    constructor() {
 
-    if ( (req.body.username != null ) && (req.body.content != null) ) {
-
-        status = true;
     }
-    return status;    
-}
 
-/**
- * Renvoie un objet message
- * @param {*} req  : Utilise l'objet requête en paramètres
- */
-function hydrate(req) {
+    /**
+     * rajoute un user en base de données
+     */
+    create(req, res) {
 
-    return new messageEntity.message(req.body.id, req.body.username, req.body.content);
-}
+        let service = {
+            'verifyBody': new jsonCheckService.jsonCheck(),
+            'verifyData': new contentService.contentCheck("message", req.body),
+            'generateObject': new hydrateService.hydrate("message", req.body),
+            'message': new messageService.message(),
+            'messageRequest': new messageRequest.messageRequest(),
+        };
 
-function find(req) {
+        let output = service.message.getFailed();
 
-    let status = false;
+        if (service.verifyBody.content(req.body)) {
 
-    if ( messageRequest.find(req.body.id) != null) {
+            if (service.verifyData.checkMessage() == true) {
 
-        status = true;
+                /*
+                service.messageRequest.find(req.body.id).then(function(result){
+
+                    console.log(result);
+                    return result; 
+                });
+                */
+                service.messageRequest.create(service.generateObject.getObject());
+                output = service.message.getSuccess();
+            }
+        }
+        return res.status(200).send(output);
     }
-    return status;
-}
 
-/**
- * Corresponds à la path /message avec la méthode POST
- * Permet la création d'un message
- */
-exports.create = function (req, res) {
+    /**
+     * renvoie tout les objets messages en base de données
+     */
+    read(req, res) {
 
-    let output = "The message has not been sent";
-    res.status(401);
+        let service = { 'messageRequest': new messageRequest.messageRequest() };
 
-    if (verify(req)) {
+        service.messageRequest.read().then(function (result) {
 
-        let message = hydrate(req);
-        messageRequest.create(message);
-        
-        output = "The message has been sent";
-        res.status(200);
-    }    
+            return res.status(200).send(result);
+        });
+    }
 
-    res.send(output);
-}
+    /**
+     * Corresponds à la path /message avec la méthode PUT
+     * Permet la mise à jour d'un message en base auprès du modèle
+     */
+    update(req, res) {
 
-/**
- * Corresponds à la path /message avec la méthode GET
- * Récupère les messages en base auprès du modèle
- */
-exports.read = function ( req, res) {
+        let service = {
+            'verifyBody': new jsonCheckService.jsonCheck(),
+            'verifyData': new contentService.contentCheck("message", req.body),
+            'generateObject': new hydrateService.hydrate("message", req.body),
+            'message': new messageService.message(),
+            'messageRequest': new messageRequest.messageRequest(),
+        };
 
-    messageRequest.read().then(function(result){
+        let output = service.message.getFailed();
 
-        return res.status(200).send(result);
-    });
-}
+        if (service.verifyBody.content(req.body)) {
 
-/**
- * Corresponds à la path /message avec la méthode PUT
- * Permet la mise à jour d'un message en base auprès du modèle
- */
-exports.update = function(req, res) {
+            if (service.verifyData.checkMessage() == true) {
 
-    let output = "The message has not been update";
-    res.status(401);
+                service.messageRequest.find(req.body.id).then(function (result) {
 
-    if (verify(req)) {
-        
-        output = "The message has not been found.";
+                    if (result == true) {
 
-        if (find(req)) {
+                        service.messageRequest.update(service.generateObject.getObject());
+                        output = service.message.getSuccess();
 
-            let message = hydrate(req);
-            messageRequest.update(message.id, message.content);
+                        return res.status(200).send(output);
+                    }
+                });
 
-            output = "The message has been update";
-            res.status(200);
+            }
         }
-    }    
-    res.send(output);
-}
+    }
 
-/**
- * Corresponds à la path /message avec la méthode DELETE
- * Permet la suppression d'un message en base auprès du modèle
- */
-exports.delete = function (req, res) {
+    /**
+    * Corresponds à la path /message avec la méthode PUT
+    * Permet la mise à jour d'un message en base auprès du modèle
+    */
+    delete(req, res) {
 
-    let output = "The message has not been delete";
-    res.status(401);
+        let service = {
+            'verifyBody': new jsonCheckService.jsonCheck(),
+            'verifyData': new contentService.contentCheck("message", req.body),
+            'generateObject': new hydrateService.hydrate("message", req.body),
+            'message': new messageService.message(),
+            'messageRequest': new messageRequest.messageRequest(),
+        };
 
-    if (verify(req)) {
-        
-        output = "The message has not been found.";
+        let output = service.message.getFailed();
 
-        if (find(req)) {
+        if (service.verifyBody.content(req.body)) {
 
-            let message = hydrate(req);
-            messageRequest.delete(message.id);
+            if (service.verifyData.checkMessage() == true) {
 
-            output = "The message has been delete";
-            res.status(200);
+                service.messageRequest.find(req.body.id).then(function (result) {
+
+                    if (result == true) {
+
+                        service.messageRequest.delete(service.generateObject.getObject());
+                        output = service.message.getSuccess();
+
+                        return res.status(200).send(output);
+                    }
+                });
+
+            }
         }
-    }    
-    res.send(output);
+    }
 }
+
+module.exports.messageController = messageController;

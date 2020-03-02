@@ -1,20 +1,22 @@
 var connexion = require('../config/connexion');
-//var message = require('../model/message');
-
 
 /**
- * Gère le CRUD de request coté base de données
+ * gère le CRUD de user coté base de données
+ * 
+ * @author : Francois Macko
  */
-var messageRequest = {
+class messageRequest {
 
-    response : null,
+    constructor() {
 
-    connection: require('../config/connexion'),
+    }
 
     /**
-     * Vérifie si un objet existe en base, renvoie un booléen
+     * recherche un message en base de données
+     * 
+     * @param {*} id : corresponds à l'id du message recherché
      */
-    find: (id) => {
+    find(id) {
 
         var query = new Promise(function(resolve, reject){
 
@@ -26,7 +28,7 @@ var messageRequest = {
 
         return  query.then(function(cache){ 
 
-            if(cache.length != 0) {
+            if( cache[0] != undefined) {
 
                 return true;
             } else {
@@ -34,20 +36,21 @@ var messageRequest = {
                 return false;
             }
         }); 
-    },
+    }
+
 
     /**
-     * Crée un objet message en base de données
+     * rajoute un user en base de données
      */
-    create: (message) => {
+    create(message) {
 
         connexion.query("INSERT INTO messages set ?", message);
-    },
+    }
 
     /**
      * Renvoie tout les objets messages en base de données
      */
-    read: () => {
+    read() {
 
         var query = new Promise(function(resolve, reject){
 
@@ -61,26 +64,35 @@ var messageRequest = {
 
             return cache;
         });
-    },
+    }
 
     /**
      * Mets à jour un objet message un objet en base de données
      */
-    update: (id) => {
+    update(message) {
 
-        //connexion.query("Update messages set content = ? where id = ?", content , id);
-        connexion.query("Update messages set content = 'test' where id = ?", id, function (err, result) {});
-    },
+        connexion.query("Update messages set content =? where id = ?", [message.content, message.id ] , function (err, result) {});
+        // code incomplet! change uniquement le contenu de content
+        // peut-être directement injecter l'objet message?
+    }
 
     /**
      * Supprime un objet message de la base de données
      */
-    delete: (id) => {
+    delete(message) {
 
-        console.log(id);
+        console.log(message.id);
 
-        connexion.query("delete messages where id = ?" , id, function (err, result) {});
-    },
-};
+        connexion.query("delete from messages where id = ?" , message.id, function (err, result) {});
+    }
 
-module.exports = messageRequest;
+    /**
+     * Supprime un objet message de la base de données
+     */
+    deleteByUsername(username) {
+
+        connexion.query("delete from messages where username = ?" , username, function (err, result) {});
+    }
+}
+
+module.exports.messageRequest = messageRequest;

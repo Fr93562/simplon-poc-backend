@@ -75,7 +75,7 @@ class hydrate {
      */
     createMessage() {
 
-        this.object = new messageEntity.message(this.data.id, this.data.title, this.data.content);
+        this.object = new messageEntity.message(this.data.id, this.data.username, this.data.content);
     }
 }
 

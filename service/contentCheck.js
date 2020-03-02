@@ -87,15 +87,14 @@ class contentCheck {
         if (this.checkSelected()) {
 
             output = true;
-            /*
-            if (this.value(this.content.id, "number", null) == false) {
+ 
+            if (this.value(this.content.username, "string", null) == false) {
 
                 output = false;
-            } */ if (this.value(this.content.username, "string", null) == false) {
 
-                output = false;
             } if (this.value(this.content.content, "string", null) == false) {
 
+                console.log("here");
                 output = false;
             } 
         }
