@@ -3,8 +3,8 @@
  */
 class message {
 
-    success = {'response': "success"};
-    failed = {'response': "failed"};
+    success = {"response": "success"};
+    failed = {"response": "failed"};
 
     constructor () {
 

@@ -72,7 +72,7 @@ En cas de réussite:
 
 ```json 
 {
-  'response': "success"
+  "response": "success"
   }
 ```
 
@@ -80,7 +80,7 @@ En cas d'échec:
 
 ```json 
 {
-  'response': "failed"
+  "response": "failed"
   }
 ```
 
@@ -119,7 +119,7 @@ Réponse:
         "id": 1,
         "username": "falseusername",
         "content": "test"
-    }, ...
+    },
 ```
 
 ### Mettre à jour un message
