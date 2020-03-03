@@ -2,22 +2,30 @@
 
 module.exports = function (app) {
 
-  // User controller
+  // UserController
 
   var userController = require('../controller/userController');
   var userPath = new userController.userController();
 
   app.route('/user').post(userPath.create);
 
-  // Message controller
+  // MessageController
 
   var messageController = require('../controller/messageController');
   var messagePath = new messageController.messageController();
 
   app.route('/message').post(messagePath.create)
-      .get(messagePath.read)
-      .put(messagePath.update)
-      .delete(messagePath.delete); 
+    .get(messagePath.read)
+    .put(messagePath.update)
+    .delete(messagePath.delete);
+
+  // SecurityController
+
+  var securityController = require('../controller/securityController');
+  var securityPath = new securityController.securityController();
+
+  app.route('/login').post(securityPath.login);
+  app.route('/logout').post(securityPath.logout);
 
   /**
    * Path par défaut, affiche des informations sur la requête précédente 

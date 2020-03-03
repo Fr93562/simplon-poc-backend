@@ -9,9 +9,40 @@ class message {
 
     constructor(id, username, content) {
 
+        this.setId(id);
+        this.setUsername(username);
+        this.setContent(content);
+    }
+
+    // méthodes getters et setters
+    getId() {
+
+        return this.id;
+    }
+
+    setId(id) {
+
         this.id = id;
+    }
+
+    getUsername() {
+
+        return this.username;
+    }
+
+    setUsername(username) {
+
         this.username = username;
-        this.content = content;
+    }
+
+    getContent() {
+
+        return this.content;
+    }
+
+    setContent(content) {
+
+        this.content = content
     }
 }
 module.exports.message = message;
