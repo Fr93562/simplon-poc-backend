@@ -22,7 +22,7 @@ class jsonCheck {
         
         let output = false;
 
-        if (body != null) {
+        if (body !== null) {
 
             output = true;
         }

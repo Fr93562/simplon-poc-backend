@@ -60,13 +60,13 @@ class contentCheck {
             if (this.value(this.content.id, "number", null) == false) {
 
                 output = false;
-            } */ if (this.value(this.content.username, "string", null) == false) {
+            } */ if (this.value(this.content.username, "string", null) === false) {
 
                 output = false;
-            } if (this.value(this.content.password, "string", null) == false) {
+            } if (this.value(this.content.password, "string", null) === false) {
 
                 output = false;
-            } if (this.value(this.content.email, "string", "email") == false) {
+            } if (this.value(this.content.email, "string", "email") === false) {
 
                 output = false;
             }
@@ -88,13 +88,12 @@ class contentCheck {
 
             output = true;
  
-            if (this.value(this.content.username, "string", null) == false) {
+            if (this.value(this.content.username, "string", null) === false) {
 
                 output = false;
 
-            } if (this.value(this.content.content, "string", null) == false) {
+            } if (this.value(this.content.content, "string", null) === false) {
 
-                console.log("here");
                 output = false;
             } 
         }
@@ -115,7 +114,7 @@ class contentCheck {
 
         for (template in this.templates) {
 
-            if (this.selected == template) {
+            if (this.selected === template) {
 
                 output = true;
                 break;
@@ -140,11 +139,11 @@ class contentCheck {
 
         if (typeof (testValue) === type) {
 
-            if (specification == null) {
+            if (specification === null) {
 
                 output = true;
             }
-            if (specification == "email") {
+            if (specification === "email") {
 
                 if (testValue.includes('@')) {
 

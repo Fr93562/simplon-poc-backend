@@ -28,7 +28,7 @@ class messageRequest {
 
         return  query.then(function(cache){ 
 
-            if( cache[0] != undefined) {
+            if( cache[0] !== undefined) {
 
                 return true;
             } else {
@@ -80,8 +80,6 @@ class messageRequest {
      * Supprime un objet message de la base de données
      */
     delete(message) {
-
-        console.log(message.id);
 
         connexion.query("delete from messages where id = ?" , message.id, function (err, result) {});
     }

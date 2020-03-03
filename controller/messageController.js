@@ -114,11 +114,11 @@ class messageController {
 
         if (service.verifyBody.content(req.body)) {
 
-            if (service.verifyData.checkMessage() == true) {
+            if (service.verifyData.checkMessage() === true) {
 
                 service.messageRequest.find(req.body.id).then(function (result) {
 
-                    if (result == true) {
+                    if (result === true) {
 
                         service.messageRequest.delete(service.generateObject.getObject());
                         output = service.message.getSuccess();

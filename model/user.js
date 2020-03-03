@@ -42,7 +42,7 @@ class user {
 
     setUsername(username) {
 
-        if ( this.stringLength(30, username) == true ) {
+        if ( this.stringLength(30, username) === true ) {
 
             this.username = this.stringSlice(30, username);
 
@@ -60,7 +60,7 @@ class user {
 
     setPassword(password) {
 
-        if ( this.stringLength(30, password) == true ) {
+        if ( this.stringLength(30, password) === true ) {
 
             this.password = this.stringSlice(30, password);
 

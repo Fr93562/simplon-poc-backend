@@ -22,8 +22,7 @@ class securityController{
      */
     login(req, res) {
 
-        console.log("login est fonctionnel");
-
+        //console.log("login est fonctionnel");
     }
 
     /**
@@ -31,8 +30,7 @@ class securityController{
      */
     logout(req, res) {
 
-        console.log("log out est fonctionnel");
-
+        //console.log("log out est fonctionnel");
     }
 }
 
