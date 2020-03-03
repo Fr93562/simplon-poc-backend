@@ -1,5 +1,7 @@
 # POC back-end Simplon
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a653258183e54e0cb7c97ded6cf6c727)](https://app.codacy.com/manual/Fr93562/simplon-poc-backend?utm_source=github.com&utm_medium=referral&utm_content=Fr93562/simplon-poc-backend&utm_campaign=Badge_Grade_Dashboard)
+
 
 
 ![poc](https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2015/07/messagerie-instantanee-travers-le-monde-770x577__w770.jpg)
