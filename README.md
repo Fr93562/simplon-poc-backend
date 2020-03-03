@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8279bdb02a9346d38c64910971ae0a5c)](https://www.codacy.com/manual/Fr93562/simplon-poc-backend?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Fr93562/simplon-poc-backend&amp;utm_campaign=Badge_Grade)
+
 # POC back-end Simplon
 
 
@@ -28,11 +30,6 @@ Ce projet est une API Rest qui propose des fonctionnalités pour une application
 * Librairies: ExpressJS, MySQL, Body-Parser, Nodemon, Mocha
 
 
-## Qualité du code
-
-* A venir
-
-
 ## Installation du projet:
 
 - Récupérer le repository à l'aide de gitclone
@@ -59,8 +56,6 @@ Cette API propose deux types de ressources:
 
 
 ## Fonctionnement de l'API:
-
-/
 
 ## Ressources disponibles
 
